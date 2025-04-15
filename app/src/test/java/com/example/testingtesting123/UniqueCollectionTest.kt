@@ -1,5 +1,6 @@
 package com.example.testingtesting123
 
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -17,6 +18,11 @@ class UniqueCollectionTest {
     @Test
     fun addAnItem() {
 
+        val before = collection.size()
+        collection.addItem(Item("test"));
+        val after = collection.size()
+        Assert.assertNotEquals(before, after)
+
     }
 
     // TODO 2: Write a test to ensure that only unique items can be added to the collection
@@ -24,6 +30,16 @@ class UniqueCollectionTest {
     @Test
     fun addUniqueItem() {
 
+        //Adding same item, second add is ignored
+        val testItem = Item("test")
+        collection.addItem(testItem)
+        collection.addItem(testItem)
+        Assert.assertEquals(collection.size(), 1)
+
+        //Adding different item, successful add
+        val anotherTestItem = Item("test2")
+        collection.addItem(anotherTestItem)
+        Assert.assertEquals(collection.size(), 2)
     }
 
     // Test Driven Development (TDD) test - complete specified function so that this test passes
